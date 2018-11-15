@@ -13,6 +13,7 @@ contract Redistribution {
   mapping (address => Role) public addressToRole;
   mapping (bytes32 => bool) public paymentSettled;
   mapping (bytes32 => bool) public paymentInitiated;
+  mapping (bytes32 => address) public paymentHashToMerchant;
 
   uint256 nonce;
 
@@ -48,6 +49,20 @@ contract Redistribution {
   }
 
 
+  function registerAsCustomer() public {
+    require(addressToRole[msg.sender] != Role.Customer);
+    require(addressToRole[msg.sender] != Role.Merchant);
+    addressToRole[msg.sender] = Role.Customer;
+  }
+
+
+  function registerAsMerchant() public {
+    require(addressToRole[msg.sender] != Role.Customer);
+    require(addressToRole[msg.sender] != Role.Merchant);
+    addressToRole[msg.sender] = Role.Merchant;
+  }
+
+
   function pay
   (
     address _merchant,
@@ -73,6 +88,9 @@ contract Redistribution {
     // set payment to issued
     paymentInitiated[_paymentHash] = true;
 
+    // assign payment hash to merchant
+    paymentHashToMerchant[_paymentHash] = _merchant;
+
     // record the payment as settlable receipt for the merchant
     emit PaymentInitiated(msg.sender, _merchant, _value, now, _paymentHash, nonce);
   }
@@ -89,6 +107,9 @@ contract Redistribution {
     paymentHasBeenInitiated(_paymentHash)
     public
   {
+    // the settler must be the assigned merchant
+    require(paymentHashToMerchant[_paymentHash] == msg.sender);
+
     // set payment to settled
     paymentSettled[_paymentHash] = true;
 
