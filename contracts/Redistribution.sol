@@ -13,11 +13,11 @@ contract Redistribution {
 
   mapping (address => Role) public addressToRole;
   mapping (bytes32 => bool) public paymentSettled;
-  mapping (bytes32 => bool) public paymentIssued;
+  mapping (bytes32 => bool) public paymentInitiated;
 
   uint256 nonce;
 
-  event PaymentIssued(
+  event PaymentInitiated(
     address client,
     address merchant,
     uint256 value,
@@ -43,8 +43,8 @@ contract Redistribution {
     _;
   }
 
-  modifier paymentHasBeenIssued(bytes32 paymentHash) {
-    require(paymentIssued[paymentHash] == true);
+  modifier paymentHasBeenInitiated(bytes32 paymentHash) {
+    require(PaymentInitiated[paymentHash] == true);
     _;
   }
 
@@ -68,14 +68,14 @@ contract Redistribution {
     bytes32 _paymentHash = keccak256(abi.encoded(msg.sender, _merchant, _value, now, nonce));
 
     // all the requirements
-    require(paymentIssued[_paymentHash] == false);
+    require(paymentInitiated[_paymentHash] == false);
     require(paymentSettled[_paymentHash] == false);
 
     // set payment to issued
-    paymentIssued[_paymentHash] = true;
+    paymentInitiated[_paymentHash] = true;
 
     // record the payment as settlable receipt for the merchant
-    emit PaymentIssued(msg.sender, _merchant, _value, now, _paymentHash, nonce);
+    emit PaymentInitiated(msg.sender, _merchant, _value, now, _paymentHash, nonce);
   }
 
 
@@ -87,7 +87,7 @@ contract Redistribution {
   )
     onlyMerchant
     paymentHasNotBeenSettled(_paymentHash)
-    paymentHasBeenIssued(_paymentHash)
+    paymentHasBeenInitiated(_paymentHash)
     public
   {
     // set payment to settled
