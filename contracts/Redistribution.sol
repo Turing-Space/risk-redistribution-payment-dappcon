@@ -4,12 +4,11 @@ pragma solidity ^0.4.24;
 /// @title Risk Redistribution Payment
 /// @dev This contract has not been conpleted!!
 /// @dev TODO:
-///           Client --> Customer; Issue --> Initiate;
 ///           "token" to be determined; USDT considered;
 ///           owner not yet integrated; rename events and mappings to distinguish
 contract Redistribution {
 
-  enum Role {Client, Merchant, Owner}
+  enum Role {Customer, Merchant, Owner}
 
   mapping (address => Role) public addressToRole;
   mapping (bytes32 => bool) public paymentSettled;
@@ -18,7 +17,7 @@ contract Redistribution {
   uint256 nonce;
 
   event PaymentInitiated(
-    address client,
+    address customer,
     address merchant,
     uint256 value,
     uint256 timeStamp,
@@ -28,8 +27,8 @@ contract Redistribution {
 
   event PaymentSettled(bytes32 paymentHash);
 
-  modifier onlyClient {
-    require(addressToRole[msg.sender] == Role.Client);
+  modifier onlyCustomer {
+    require(addressToRole[msg.sender] == Role.Customer);
     _;
   }
 
@@ -54,7 +53,7 @@ contract Redistribution {
     address _merchant,
     uint256 _value
   )
-    onlyClient
+    onlyCustomer
     public
   {
     // the actual token goes to the owner
