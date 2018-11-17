@@ -7,7 +7,7 @@ pragma solidity ^0.4.24;
 ///           "token" to be determined; USDT considered;
 ///           owner not yet integrated; rename events and mappings to distinguish
 
-import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "./openzeppelin-solidity/token/ERC20/ERC20.sol";
 
 contract Redistribution is ERC20 {
 
