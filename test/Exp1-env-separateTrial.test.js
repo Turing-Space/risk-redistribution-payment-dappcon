@@ -13,31 +13,9 @@
 // const Redistribution = artifacts.require("Redistribution");
 
 // let redistribution;
-// var lastReceiptBlock = 0
-// let paymentHashs
 
 // let t1 = [];
 // let t2 = [];
-
-// function retrieveReceipts(lastReceiptBlock, merchant) {
-//   return new Promise(function (resolve, reject) {
-
-//     let paymentHashs = [];
-//     let latestBlock = web3.eth.blockNumber;
-//     let PaymentInitiatedEvent = redistribution.PaymentInitiated({}, {
-//       fromBlock: lastReceiptBlock + 1,
-//       toBlock: latestBlock,
-//       address: merchant
-//     })
-//     PaymentInitiatedEvent.get((error, logs) => {
-//       if (error) reject(error);
-
-//       Promise.all(logs.map(function (log) {
-//         paymentHashs.push(log.args.paymentHash);
-//       })).then(() => resolve([paymentHashs, latestBlock]))
-//     })
-//   });
-// }
 
 // // --------------------------------------end of env vars-----------------------------
 // let max_trial = 10;

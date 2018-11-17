@@ -1,5 +1,9 @@
 # Experiments
 
+```
+npm test
+```
+
 ### Exp1: meaure pay function latency as merchants increases
 
 - Merchant: 10, 20, 30, ... , 100

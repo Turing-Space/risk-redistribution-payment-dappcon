@@ -23,7 +23,7 @@ contract Redistribution is ERC20 {
 
   event PaymentInitiated(
     address customer,
-    address merchant,
+    address indexed merchant, // want to filter event by merchant 
     uint256 value,
     uint256 timeStamp,
     bytes32 paymentHash,

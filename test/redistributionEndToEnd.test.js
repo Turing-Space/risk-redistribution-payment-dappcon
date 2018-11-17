@@ -12,15 +12,17 @@
 
 //     let paymentHashs = [];
 //     let latestBlock = web3.eth.blockNumber;
-//     let PaymentInitiatedEvent = redistribution.PaymentInitiated({}, {
+//     let PaymentInitiatedEvent = redistribution.PaymentInitiated({
+//       merchant: merchant
+//     }, {
 //       fromBlock: lastReceiptBlock + 1,
-//       toBlock: latestBlock,
-//       address: merchant
+//       toBlock: latestBlock
 //     })
 //     PaymentInitiatedEvent.get((error, logs) => {
 //       if (error) reject(error);
 
 //       Promise.all(logs.map(function (log) {
+//         // console.log(log.args.merchant, merchant)
 //         paymentHashs.push(log.args.paymentHash);
 //       })).then(() => resolve([paymentHashs, latestBlock]))
 //     })
