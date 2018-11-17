@@ -35,7 +35,6 @@
 //   // assert.equal(accounts.length, 110)
 //   const [owner, customer1] = accounts;
 //   const merchants = accounts.slice(2, 2 + M); // from index 2, len = number of merchants  
-//   // console.log(merchants.length)
 
 //   it("configure env", async function () {
 //     // deploy contract

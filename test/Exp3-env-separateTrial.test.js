@@ -34,7 +34,6 @@ function retrieveReceipts(lastReceiptBlock, merchant) {
       if (error) reject(error);
 
       Promise.all(logs.map(function (log) {
-        // console.log(log.args.merchant, merchant)
         paymentHashs.push(log.args.paymentHash);
       })).then(() => resolve([paymentHashs, latestBlock]))
     })
@@ -44,12 +43,12 @@ function retrieveReceipts(lastReceiptBlock, merchant) {
 // --------------------------------------end of env vars-----------------------------
 let max_trial = 10;
 let C = 1; // num of customers: FIXED
-let M = 10; // num of merchants
+let M = 100; // num of merchants
 let token = 1; // num of tokens to pay
 let fact_M = 3628800; // calculate M! in advance 
 let total_token = token * max_trial * fact_M; // total tokens needed in this exp
-let STEP = 1;
-let START_NUM = 0;
+let STEP = 10;
+let START_NUM = 10;
 let EXP_NUM = "Exp3";
 let prefix = "100M";
 // -----------------------------------end of configurable vars-----------------------------
@@ -59,7 +58,6 @@ contract('Redistribution', function (accounts) {
   // assert.equal(accounts.length, 110)
   const [owner, customer1] = accounts;
   const merchants = accounts.slice(2, 2 + M); // from index 2, len = number of merchants  
-  // console.log(merchants.length)
 
   it("configure env", async function () {
     // deploy contract
@@ -91,14 +89,7 @@ contract('Redistribution', function (accounts) {
       // Test different number of merchants
       for (var m = START_NUM; m <= M; m += STEP) {
 
-        // customer pay before merchants settle
-        // for (var _m = 0; _m < m; _m++) {
-        //   let merchant = merchants[_m];
-        //   await redistribution.pay(merchant, token, {
-        //     from: customer1
-        //   })
-        // }
-        await Promise.all(merchants.slice(0, m).map(async function (merchant) {
+        Promise.all(merchants.slice(0, m).map(async function (merchant) {
           return redistribution.pay(merchant, token, {
             from: customer1
           })
@@ -107,29 +98,14 @@ contract('Redistribution', function (accounts) {
         // start!
         t1[m] = Date.now()
 
-        // for (var _m = 0; _m < m; _m++) {
-        //   let merchant = merchants[_m];
-        //   let res = await retrieveReceipts(lastReceiptBlock[_m], merchant);
-        //   [paymentHashs, lastReceiptBlock[_m]] = res
-        //   console.log(paymentHashs, lastReceiptBlock[_m], merchant)
-        //   await Promise.all(paymentHashs.map(function (paymentHash) {
-        //     // console.log(paymentHash)
-        //     return redistribution.settle(paymentHash, {
-        //       from: merchant
-        //     })
-        //   }))
-        // }
         await Promise.all(merchants.slice(0, m).map(async function (merchant) {
           let res = await retrieveReceipts(lastReceiptBlock[merchant], merchant);
           [paymentHashs, lastReceiptBlock[merchant]] = res
-          console.log(paymentHashs, lastReceiptBlock[merchant])
           await Promise.all(paymentHashs.map(function (paymentHash) {
-            // console.log(paymentHash)
             return redistribution.settle(paymentHash, {
               from: merchant
             })
           }))
-          // console.log(merchant)
         }));
 
         t2[m] = Date.now()

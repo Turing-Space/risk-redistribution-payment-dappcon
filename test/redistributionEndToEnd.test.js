@@ -22,7 +22,6 @@
 //       if (error) reject(error);
 
 //       Promise.all(logs.map(function (log) {
-//         // console.log(log.args.merchant, merchant)
 //         paymentHashs.push(log.args.paymentHash);
 //       })).then(() => resolve([paymentHashs, latestBlock]))
 //     })
@@ -76,7 +75,6 @@
 //   it("merchant should settle 10 token from previous payment event ", async function () {
 //     let res = await retrieveReceipts(lastReceiptBlock, merchant1);
 //     [paymentHashs, lastReceiptBlock] = res
-//     // console.log(paymentHashs, lastReceiptBlock)
 
 //     await Promise.all(paymentHashs.map(function (paymentHash) {
 //       return redistribution.settle(paymentHash, {
@@ -107,7 +105,6 @@
 //   it("merchant should settle 2 more transactions from previous payment event ", async function () {
 //     let res = await retrieveReceipts(lastReceiptBlock, merchant1);
 //     [paymentHashs, lastReceiptBlock] = res
-//     // console.log(paymentHashs, lastReceiptBlock)
 //     await Promise.all(paymentHashs.map(function (paymentHash) {
 //       return redistribution.settle(paymentHash, {
 //         from: merchant1
@@ -118,7 +115,6 @@
 //   it("should revert when paymentHash has already been settled", async function () {
 //     let res = await retrieveReceipts(lastReceiptBlock - 1, merchant1);
 //     [paymentHashs, lastReceiptBlock] = res
-//     // console.log(paymentHashs, lastReceiptBlock)
 //     await shouldFail.reverting(redistribution.settle(paymentHashs[0], {
 //       from: merchant1
 //     }))
