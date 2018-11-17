@@ -76,7 +76,7 @@ contract('Redistribution', function (accounts) {
 
         t2[m] = Date.now()
         let latency = t2[m] - t1[m]
-        console.log(m, ":", latency);
+        // console.log(m, ":", latency);
         ans_array_per_trial.push(latency);
 
       }
