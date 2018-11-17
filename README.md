@@ -18,12 +18,12 @@ npm test
 
 ### Exp3: meaure settle function latency as merchants increases
 
-- Merchant: 10, 20, 30, ... , 100
+- Merchant: 2, 4, 6, ... , 20
 - Customer: 1
 - Trials: 10
 
-### Exp4: meaure settle function latency as merchants increases
+### Exp4: meaure settle function latency as customers increases
 
 - Merchant: 1
-- Customer: 10, 20, 30, ... , 100
+- Customer: 2, 4, 6, ... , 20
 - Trials: 10
