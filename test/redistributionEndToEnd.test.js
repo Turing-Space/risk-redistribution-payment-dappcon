@@ -20,19 +20,9 @@ function retrieveReceipts(lastReceiptBlock, merchant) {
     PaymentInitiatedEvent.get((error, logs) => {
       if (error) reject(error);
 
-      // logs.forEach(log => console.log(log.args))
-      var itemsProcessed = 0;
-      if (logs.length >= 1) {
-        logs.forEach(async log => {
-          paymentHashs.push(log.args.paymentHash);
-
-          // resolve promise on last processed item
-          itemsProcessed++;
-          if (itemsProcessed === logs.length) {
-            resolve([paymentHashs, latestBlock]);
-          }
-        })
-      } else resolve([paymentHashs, latestBlock]);
+      Promise.all(logs.map(function (log) {
+        paymentHashs.push(log.args.paymentHash);
+      })).then(() => resolve([paymentHashs, latestBlock]))
     })
   });
 }
