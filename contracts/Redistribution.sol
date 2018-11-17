@@ -55,7 +55,7 @@ contract Redistribution is ERC20 {
   constructor() public {
       owner = msg.sender;
       // the token issuer has 1000 tokens initially
-      _mint(owner, 1000);
+      _mint(owner, 100000000000000000000000000000000000000);
   }
 
   function registerAsCustomer() public {
