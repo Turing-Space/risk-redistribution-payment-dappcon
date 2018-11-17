@@ -1,6 +1,7 @@
 # Experiments
 
 ```
+ssh -v -i path/to/CPE.pem ubuntu@35.153.184.3
 npm test
 ```
 
