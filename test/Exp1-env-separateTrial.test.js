@@ -49,6 +49,7 @@ let total_token = token * max_trial * fact_M; // total tokens needed in this exp
 let STEP = 1;
 let START_NUM = 1;
 let EXP_NUM = "Exp1";
+let prefix = "10M";
 // -----------------------------------end of configurable vars-----------------------------
 
 
@@ -79,7 +80,7 @@ contract('Redistribution', function (accounts) {
 
   it("Exp1: test latency of pay ", async function () {
     // Catch file prefix
-    const prefix = argv['prefix'];
+    // const prefix = argv['prefix'];
 
     // Do multiple trials
     for (var j = 1; j <= max_trial; j++) {
@@ -103,6 +104,7 @@ contract('Redistribution', function (accounts) {
 
       }
       // Output to file (m:time)
+      // writeToFile(EXP_NUM + "-" + prefix + "-trial#" + j.toString(), ans_array_per_trial);
       writeToFile(EXP_NUM + "-" + prefix + "-trial#" + j.toString(), ans_array_per_trial);
     }
   }).timeout(3000000000);
