@@ -7,6 +7,7 @@ cd risk-redistribution-payment
 npm install
 nohup npm test &
 disown <PID>
+jobs (see if disowned successfully)
 exit
 ```
 
