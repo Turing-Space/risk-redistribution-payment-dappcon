@@ -8,6 +8,7 @@ npm install
 nohup npm test &
 disown <PID>
 jobs (see if disowned successfully)
+tail -f nohup.out (see console logs)
 exit
 ```
 
