@@ -1,8 +1,15 @@
 # Experiments
 
 ```
-ssh -v -i path/to/CPE.pem ubuntu@35.153.184.3
-npm test
+ssh -v -i /path/to/CPE.pem ubuntu@54.211.179.4
+git clone https://github.com/yhuag/risk-redistribution-payment.git
+cd risk-redistribution-payment
+npm install
+nohup npm test &
+disown <PID>
+jobs (see if disowned successfully)
+tail -f nohup.out (see console logs)
+exit
 ```
 
 ### Exp1: meaure pay function latency as merchants increases
