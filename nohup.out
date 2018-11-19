@@ -1,0 +1,33 @@
+
+> risk-redistribution-payment@1.0.0 test /home/ubuntu/risk-redistribution-payment
+> scripts/test.sh
+
+Starting our own ganache instance
+Truffle v4.1.14 (core: 4.1.14)
+Solidity v0.4.24 (solc-js)
+Compiling ./contracts/Migrations.sol...
+Compiling ./contracts/Redistribution.sol...
+Compiling ./contracts/openzeppelin-solidity/math/SafeMath.sol...
+Compiling ./contracts/openzeppelin-solidity/token/ERC20/ERC20.sol...
+Compiling ./contracts/openzeppelin-solidity/token/ERC20/IERC20.sol...
+
+[0m[0m
+[0m  Contract: Redistribution[0m
+  [32m  ✓[0m[90m configure env[0m[31m (2871ms)[0m
+  [32m  ✓[0m[90m Exp1: test latency of pay [0m[31m (199462ms)[0m
+
+[0m  Contract: Redistribution[0m
+  [32m  ✓[0m[90m configure env[0m[31m (4766ms)[0m
+  [32m  ✓[0m[90m Exp2: test latency of pay [0m[31m (214468ms)[0m
+
+[0m  Contract: Redistribution[0m
+  [32m  ✓[0m[90m configure env[0m[31m (519ms)[0m
+  [32m  ✓[0m[90m Exp3: test latency of settle [0m[31m (655486ms)[0m
+
+[0m  Contract: Redistribution[0m
+  [32m  ✓[0m[90m configure env[0m[31m (10232ms)[0m
+  [32m  ✓[0m[90m Exp4: test latency of settle [0m[31m (1108981ms)[0m
+
+
+[92m [0m[32m 8 passing[0m[90m (37m)[0m
+
